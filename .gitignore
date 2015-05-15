@@ -1,0 +1,7 @@
+.DS_Store
+UnityProject/Temp/
+UnityProject/Assets/Plugins/Android/Vungle_lib/libs/vunglePlugin.*
+android-plugin/src/com/vungle/*.class
+*.apk
+export.log
+VungleSDK.unitypackage
