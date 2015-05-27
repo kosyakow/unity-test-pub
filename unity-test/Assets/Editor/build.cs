@@ -10,8 +10,9 @@ class BuildGenerator
 		PlayerSettings.companyName = "Vungle";
 		PlayerSettings.productName = "VungleUnityTest";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
+		
 	
-		PlayerSettings.Android.bundleVersionCode = 1;
+		PlayerSettings.Android.bundleVersionCode = 2;
 
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.Android);
 		var original = EditorBuildSettings.scenes; 
@@ -32,7 +33,8 @@ class BuildGenerator
 		PlayerSettings.bundleIdentifier = "com.vungle.unitytest";
 		PlayerSettings.companyName = "Vungle";
 		PlayerSettings.productName = "VungleUnityTest";
-		PlayerSettings.bundleVersion = "1.0";
+		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
+		PlayerSettings.shortBundleVersion = CommandLineReader.GetCustomArgument("ver");
 		
 		PlayerSettings.Android.bundleVersionCode = 1;
 		
