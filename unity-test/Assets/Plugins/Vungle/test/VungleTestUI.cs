@@ -5,17 +5,33 @@ using System.Collections.Generic;
 
 public class VungleTestUI : MonoBehaviour
 {
+	public bool logView = false;
+	public bool enableLog = true;
+	public string log = "";
 	public bool landscape = false;
 	public bool portrait = false;
 	public bool incentivized = false;
+	public bool immersive = false;
 	public bool muted = false;
 	public bool large = false;
 	public string appId = "vungleTest";
+	public string userTag = "";
 	public bool adAvailable = false;
 	public string alertTitle = "";
 	public string alertText = "";
 	public string closeText = "";
 	public string continueText = "";
+
+	public string placement = "";
+	public string key1 = "";
+	public string key2 = "";
+	public string key3 = "";
+	public string key4 = "";
+	public string key5 = "";
+	public string key6 = "";
+	public string key7 = "";
+	public string key8 = "";
+
 	public string endPoint = "";
 	public bool bInit = false;
 	public Vector2 scrollPosition = Vector2.zero;
@@ -100,75 +116,151 @@ public class VungleTestUI : MonoBehaviour
 		
 	}
 
+	Dictionary<string,object> formatOptions() {
+		#if UNITY_IPHONE
+		var orientation = 5;
+		if (landscape && !portrait) {
+			orientation = 4;
+		}
+		else if (portrait)
+			orientation = 3;
+		#endif
+		#if UNITY_ANDROID
+		var orientation = landscape?true:false;
+		#endif
+		Dictionary<string,object> options = new Dictionary<string,object> ();
+		options.Add ("incentivized", incentivized);
+		options.Add ("orientation", orientation);
+		options.Add ("large", large);
+		if (userTag != "")
+			options.Add ("userTag", userTag);
+		if (alertTitle != "")
+			options.Add ("alertTitle", alertTitle);
+		if (alertText != "")
+			options.Add ("alertText", alertText);
+		if (closeText != "")
+			options.Add ("closeText", closeText);
+		if (continueText != "")
+			options.Add ("continueText", continueText);
+		options.Add ("placement", placement);
+		options.Add ("immersive", immersive);
+		options.Add ("key1", key1);
+		options.Add ("key2", key2);
+		options.Add ("key3", key3);
+		options.Add ("key4", key4);
+		options.Add ("key5", key5);
+		options.Add ("key6", key6);
+		options.Add ("key7", key7);
+		options.Add ("key8", key8);
+		return options;
+	}
+
 	void OnGUI()
 	{
 		beginGuiColomn();
 
 		#if UNITY_IPHONE
-		GUI.enabled = !bInit;
-		GUILayout.Label ("API Endpoint: ");
-		endPoint = GUILayout.TextField (endPoint);
-		if( GUILayout.Button( "Set endpoint" ) )
+		if( GUILayout.Button( logView?"Main":"Log" ) )
 		{
-			Vungle.setEndPoint(endPoint);
+			logView = !logView;
 		}
-		GUI.enabled = true;
 		#endif
-		GUILayout.Label ("App ID: ");
-		appId = GUILayout.TextField (appId);
-
-		if( GUILayout.Button( "Init" ) )
-		{
-			bInit = true;
-			Vungle.init( appId, appId );
-			if (Vungle.isAdvertAvailable())
-				adAvailable = true;
-		}
-
-		GUI.enabled = adAvailable;
-		
-		GUILayout.Label ("Options: ");
-
-		#if UNITY_IPHONE
-		landscape = GUILayout.Toggle(landscape, "Force landscape");
-		portrait = GUILayout.Toggle(portrait, "Force portrait");
-		#endif
-		incentivized = GUILayout.Toggle(incentivized, "Incentivized ad");
-		muted = GUILayout.Toggle(muted, "Start muted");
-		#if UNITY_IPHONE
-		large = GUILayout.Toggle(large, "Large buttons");
-		#endif
-
-		if( GUILayout.Button( "Play Ad" ) )
-		{
-			Vungle.setSoundEnabled( !muted );
-			var orientation = 5;
-			if (landscape && !portrait) {
-				orientation = 4;
+		if (!logView) {
+			#if UNITY_IPHONE
+			GUI.enabled = !bInit;
+			GUILayout.Label ("API Endpoint: ");
+			endPoint = GUILayout.TextField (endPoint);
+			if (GUILayout.Button ("Set endpoint")) {
+				Vungle.setEndPoint (endPoint);
 			}
-			else if (portrait)
-				orientation = 3;
-			Vungle.playAdEx(incentivized, orientation, large, "", alertTitle, alertText, closeText, continueText);
-		}
+			GUI.enabled = true;
+			#endif
+			GUILayout.Label ("App ID: ");
+			appId = GUILayout.TextField (appId);
+			GUILayout.Label ("User tag: ");
+			userTag = GUILayout.TextField (userTag);
 
-		#if UNITY_IPHONE
-		if( GUILayout.Button( "Clear cache" ) )
-		{
-			adAvailable = false;
-			Vungle.clearCache( );
-		}
-		#endif
+			if (GUILayout.Button ("Init")) {
+				bInit = true;
+				Vungle.init (appId, appId);
+				if (Vungle.isAdvertAvailable ())
+					adAvailable = true;
+			}
 
-		GUI.enabled = adAvailable && incentivized;
-		GUILayout.Label ("Incentivized options: ");
-		GUILayout.Label ("Alert title: ");
-		alertTitle = GUILayout.TextField (alertTitle);
-		GUILayout.Label ("Alert text: ");
-		alertText = GUILayout.TextField (alertText);
-		GUILayout.Label ("Alert 'Close' text: ");
-		closeText = GUILayout.TextField (closeText);
-		GUILayout.Label ("Alert 'Continue' test: ");
-		continueText = GUILayout.TextField (continueText);
+			GUI.enabled = adAvailable;
+		
+			GUILayout.Label ("Options: ");
+
+			#if UNITY_IPHONE
+			landscape = GUILayout.Toggle (landscape, "Force landscape");
+			portrait = GUILayout.Toggle (portrait, "Force portrait");
+			#endif
+			#if UNITY_ANDROID
+			landscape = GUILayout.Toggle (landscape, "Match video orientation");
+			immersive = GUILayout.Toggle (immersive, "Immersive mode");
+			#endif
+			incentivized = GUILayout.Toggle (incentivized, "Incentivized ad");
+			muted = GUILayout.Toggle (muted, "Start muted");
+			#if UNITY_IPHONE
+			large = GUILayout.Toggle (large, "Large buttons");
+			#endif
+
+			if (GUILayout.Button ("Play Ad")) {
+				Vungle.setSoundEnabled (!muted);
+				Vungle.playAdWithOptions (formatOptions ());
+			}
+
+			#if UNITY_IPHONE
+			if (GUILayout.Button ("Clear cache")) {
+				adAvailable = false;
+				Vungle.clearCache ();
+			}
+			if (GUILayout.Button ("Clear sleep")) {
+				Vungle.clearSleep ();
+			}
+			#endif
+
+			GUI.enabled = adAvailable && incentivized;
+			GUILayout.Label ("Incentivized options: ");
+			GUILayout.Label ("Alert title: ");
+			alertTitle = GUILayout.TextField (alertTitle);
+			GUILayout.Label ("Alert text: ");
+			alertText = GUILayout.TextField (alertText);
+			GUILayout.Label ("Alert 'Close' text: ");
+			closeText = GUILayout.TextField (closeText);
+			GUILayout.Label ("Alert 'Continue' test: ");
+			continueText = GUILayout.TextField (continueText);
+
+			GUI.enabled = adAvailable;
+			GUILayout.Label ("More options: ");
+			GUILayout.Label ("Placement: ");
+			placement = GUILayout.TextField (placement);
+			GUILayout.Label ("Key 1: ");
+			key1 = GUILayout.TextField (key1);
+			GUILayout.Label ("Key 2: ");
+			key2 = GUILayout.TextField (key2);
+			GUILayout.Label ("Key 3: ");
+			key3 = GUILayout.TextField (key3);
+			GUILayout.Label ("Key 4: ");
+			key4 = GUILayout.TextField (key4);
+			GUILayout.Label ("Key 5: ");
+			key5 = GUILayout.TextField (key5);
+			GUILayout.Label ("Key 6: ");
+			key6 = GUILayout.TextField (key6);
+			GUILayout.Label ("Key 7: ");
+			key7 = GUILayout.TextField (key7);
+			GUILayout.Label ("Key 8: ");
+			key8 = GUILayout.TextField (key8);
+		} else {
+			if (GUILayout.Button ("Clear log")) {
+				log = "";
+			}
+			if (GUILayout.Button (enableLog ? "Disable log" : "Enable log")) {
+				enableLog = !enableLog;
+				Vungle.setLogEnable(enableLog);
+			}
+			GUILayout.Label (log);
+		}
 		endGuiColumn();
 	}
 
@@ -180,6 +272,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdEndedEvent += onAdEndedEvent;
 		Vungle.onAdViewedEvent += onAdViewedEvent;
 		Vungle.onCachedAdAvailableEvent += onCachedAdAvailableEvent;
+		Vungle.onLogEvent += onLogEvent;
 	}
 
 
@@ -189,6 +282,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdEndedEvent -= onAdEndedEvent;
 		Vungle.onAdViewedEvent -= onAdViewedEvent;
 		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
+		Vungle.onLogEvent -= onLogEvent;
 	}
 
 
@@ -216,6 +310,12 @@ public class VungleTestUI : MonoBehaviour
 		Debug.Log( "onCachedAdAvailableEvent" );
 	}
 
+	void onLogEvent(string logMessage)
+	{
+		log = logMessage + "\n" + log;
+		Debug.Log( "onLogEvent" );
+	}
+	
 	#endregion
 
 	void Start () {
