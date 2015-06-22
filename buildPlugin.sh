@@ -1,3 +1,4 @@
+set -ve
 rm ./VungleSDK.unitypackage
 git clone git@github.com:Vungle/publisher-unity-plugin.git
 echo "Build android stub"

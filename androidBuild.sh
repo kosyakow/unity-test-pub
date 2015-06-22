@@ -1,3 +1,4 @@
+set -ve
 currentPath=$(pwd)
 echo "Path:" $currentPath
 if [ -f ./version.ver ]; then
