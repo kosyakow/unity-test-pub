@@ -11,7 +11,7 @@ d1=$(date +%s)
 #25.05.2015 16:00 MSK
 build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
-rm ./unity-test/VungleUnityTest.ipa
+[ -f ./unity-test/VungleUnityTest.ipa ] && rm ./unity-test/VungleUnityTest.ipa
 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildiPhone -CustomArgs:ver=$version.$build &

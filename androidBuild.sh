@@ -11,7 +11,8 @@ d1=$(date +%s)
 #25.05.2015 16:00 MSK
 build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
-rm ./unity-test/VungleUnityTest.apk
+
+[ -f ./unity-test/VungleUnityTest.apk ] && rm ./unity-test/VungleUnityTest.apk
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildAndroid -CustomArgs:ver=$version.$build &
 ./sikuli/runScript -r ./sikuli/test.sikuli
