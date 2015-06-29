@@ -22,4 +22,5 @@ xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUni
 mv ./unity-test/VungleUnityTest.ipa .
 rm -r -f ./unity-test/VungleUnityTest
 rm -r -f ./unity-test/VungleUnityTest.xcarchive
-puck -app_id=5d9a02e5dd6c44a33d17e424da6a076b -submit=auto -download=true -notify=false VungleUnityTest.ipa
+puck -app_id=5d9a02e5dd6c44a33d17e424da6a076b -submit=auto -download=true -notify=false -open=nothing VungleUnityTest.ipa
+sleep 10

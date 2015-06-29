@@ -15,16 +15,11 @@ class BuildGenerator
 		PlayerSettings.Android.bundleVersionCode = 2;
 
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.Android);
-		var original = EditorBuildSettings.scenes; 
-		
-		var newSettings = new EditorBuildSettingsScene[original.Length + 1]; 
-		
-		System.Array.Copy(original, newSettings, original.Length); 
-		
-		var sceneToAdd = new EditorBuildSettingsScene("Assets/test.unity", true); 
-		
-		newSettings[newSettings.Length - 1] = sceneToAdd; 
-		
+		var original = EditorBuildSettings.scenes;
+		var newSettings = new EditorBuildSettingsScene[original.Length + 1];
+		System.Array.Copy(original, newSettings, original.Length);
+		var sceneToAdd = new EditorBuildSettingsScene("Assets/Plugins/Vungle/test/test.unity", true);
+		newSettings[newSettings.Length - 1] = sceneToAdd;
 		EditorBuildSettings.scenes = newSettings;
 	}
 
@@ -39,16 +34,11 @@ class BuildGenerator
 		PlayerSettings.Android.bundleVersionCode = 1;
 		
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iPhone);
-		var original = EditorBuildSettings.scenes; 
-		
-		var newSettings = new EditorBuildSettingsScene[original.Length + 1]; 
-		
-		System.Array.Copy(original, newSettings, original.Length); 
-		
-		var sceneToAdd = new EditorBuildSettingsScene("Assets/test.unity", true); 
-		
-		newSettings[newSettings.Length - 1] = sceneToAdd; 
-		
+		var original = EditorBuildSettings.scenes;
+		var newSettings = new EditorBuildSettingsScene[original.Length + 1];
+		System.Array.Copy(original, newSettings, original.Length);
+		var sceneToAdd = new EditorBuildSettingsScene("Assets/Plugins/Vungle/test/test.unity", true);
+		newSettings[newSettings.Length - 1] = sceneToAdd;
 		EditorBuildSettings.scenes = newSettings;
 	}
 }

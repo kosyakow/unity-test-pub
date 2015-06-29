@@ -17,4 +17,5 @@ echo "Build:" $build
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildAndroid -CustomArgs:ver=$version.$build &
 ./sikuli/runScript -r ./sikuli/test.sikuli
 mv ./unity-test/VungleUnityTest.apk .
-puck -app_id=e649705ac96a08062cddc4465708e7ec -submit=auto -download=true -notify=false VungleUnityTest.apk
+puck -app_id=e649705ac96a08062cddc4465708e7ec -submit=auto -download=true -notify=false -open=nothing VungleUnityTest.apk
+sleep 10
