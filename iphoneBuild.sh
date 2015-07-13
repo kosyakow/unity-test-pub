@@ -1,3 +1,4 @@
+set -ve
 currentPath=$(pwd)
 echo "Path:" $currentPath
 if [ -f ./version.ver ]; then
@@ -10,7 +11,7 @@ d1=$(date +%s)
 #25.05.2015 16:00 MSK
 build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
-rm ./unity-test/VungleUnityTest.ipa
+[ -f ./unity-test/VungleUnityTest.ipa ] && rm ./unity-test/VungleUnityTest.ipa
 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildiPhone -CustomArgs:ver=$version.$build &
@@ -21,4 +22,5 @@ xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUni
 mv ./unity-test/VungleUnityTest.ipa .
 rm -r -f ./unity-test/VungleUnityTest
 rm -r -f ./unity-test/VungleUnityTest.xcarchive
-puck -app_id=5d9a02e5dd6c44a33d17e424da6a076b -submit=auto -download=true -notify=false VungleUnityTest.ipa
+puck -api_token=d6cb4cec883a44a5a39a0ed21a845ff3 -app_id=5d9a02e5dd6c44a33d17e424da6a076b -submit=auto -download=true -notify=false -open=nothing VungleUnityTest.ipa
+sleep 10
