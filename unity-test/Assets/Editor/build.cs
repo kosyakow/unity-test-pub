@@ -29,7 +29,7 @@ class BuildGenerator
 		PlayerSettings.companyName = "Vungle";
 		PlayerSettings.productName = "VungleUnityTest";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
-		PlayerSettings.shortBundleVersion = CommandLineReader.GetCustomArgument("ver");
+//		PlayerSettings.shortBundleVersion = CommandLineReader.GetCustomArgument("ver");
 		
 		PlayerSettings.Android.bundleVersionCode = 1;
 		
