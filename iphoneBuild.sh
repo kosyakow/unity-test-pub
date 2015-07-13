@@ -15,6 +15,7 @@ echo "Build:" $build
 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildiPhone -CustomArgs:ver=$version.$build &
+sleep 180
 ./sikuli/runScript -r ./sikuli/test.sikuli
 sed -i '' 's/iPhone Developer/iPhone Distribution/g' ./unity-test/VungleUnityTest/Unity-iPhone.xcodeproj/project.pbxproj
 xcodebuild -project ./unity-test/VungleUnityTest/Unity-iPhone.xcodeproj -scheme Unity-iPhone archive -archivePath ./unity-test/VungleUnityTest.xcarchive
