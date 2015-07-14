@@ -6,9 +6,9 @@ class BuildGenerator
 {
 	static void BuildAndroid()
 	{
-		PlayerSettings.bundleIdentifier = "com.vungle.unitytest";
+		PlayerSettings.bundleIdentifier = "com.vungle.unity5test";
 		PlayerSettings.companyName = "Vungle";
-		PlayerSettings.productName = "VungleUnityTest";
+		PlayerSettings.productName = "VungleUnity5Test";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
 		
 	
@@ -25,9 +25,9 @@ class BuildGenerator
 
 	static void BuildiPhone()
 	{
-		PlayerSettings.bundleIdentifier = "com.vungle.unitytest";
+		PlayerSettings.bundleIdentifier = "com.vungle.unity5test";
 		PlayerSettings.companyName = "Vungle";
-		PlayerSettings.productName = "VungleUnityTest";
+		PlayerSettings.productName = "VungleUnity5Test";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
 //		PlayerSettings.shortBundleVersion = CommandLineReader.GetCustomArgument("ver");
 		
