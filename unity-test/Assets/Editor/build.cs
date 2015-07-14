@@ -33,7 +33,11 @@ class BuildGenerator
 		
 		PlayerSettings.Android.bundleVersionCode = 1;
 		
+	#if UNITY5_SCRIPTING_IN_UNITY4
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iPhone);
+	#else
+		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iOS);
+	#endif
 		var original = EditorBuildSettings.scenes;
 		var newSettings = new EditorBuildSettingsScene[original.Length + 1];
 		System.Array.Copy(original, newSettings, original.Length);
