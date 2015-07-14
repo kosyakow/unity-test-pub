@@ -10,6 +10,7 @@
       <activity android:label="@string/app_name" android:screenOrientation="fullSensor" android:launchMode="singleTask" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale" android:name="com.vungle.publisher.FullScreenAdActivity">
       </activity>
 	  <activity android:name="com.unity3d.player.UnityPlayerNativeActivity" />
+	  <activity android:name="com.unity3d.player.UnityPlayerActivity" />
   </application>
   
   <uses-permission android:name="android.permission.INTERNET"/>
