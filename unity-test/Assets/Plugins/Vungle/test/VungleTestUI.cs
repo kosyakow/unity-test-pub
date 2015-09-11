@@ -181,8 +181,7 @@ public class VungleTestUI : MonoBehaviour
 			userTag = GUILayout.TextField (userTag);
 
 			if (GUILayout.Button ("Init")) {
-				if (!bInit)
-					Vungle.init (appId, appId);
+				Vungle.init (appId, appId);
 				bInit = true;
 				if (Vungle.isAdvertAvailable ())
 					adAvailable = true;
