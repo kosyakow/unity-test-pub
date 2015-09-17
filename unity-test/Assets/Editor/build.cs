@@ -11,8 +11,8 @@ class BuildGenerator
 		PlayerSettings.productName = "VungleUnityTest";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
 		
-	
 		PlayerSettings.Android.bundleVersionCode = 2;
+		PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.ForceInternal;
 
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.Android);
 		var original = EditorBuildSettings.scenes;
