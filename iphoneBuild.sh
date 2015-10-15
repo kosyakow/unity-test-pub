@@ -19,7 +19,7 @@ sleep 180
 ./sikuli/runScript -r ./sikuli/test.sikuli
 sed -i '' 's/iPhone Developer/iPhone Distribution/g' ./unity-test/VungleUnity5Test/Unity-iPhone.xcodeproj/project.pbxproj
 xcodebuild -project ./unity-test/VungleUnity5Test/Unity-iPhone.xcodeproj -scheme Unity-iPhone archive -archivePath ./unity-test/VungleUnity5Test.xcarchive
-xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUnity5Test.xcarchive/" -exportPath "./unity-test/VungleUnity5Test.ipa" -exportProvisioningProfile "Vungle In House Distribution"
+xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUnity5Test.xcarchive/" -exportPath "./unity-test/VungleUnity5Test.ipa" -exportProvisioningProfile "iOSTeam Provisioning Profile: *"
 mv ./unity-test/VungleUnity5Test.ipa .
 rm -r -f ./unity-test/VungleUnity5Test
 rm -r -f ./unity-test/VungleUnity5Test.xcarchive
