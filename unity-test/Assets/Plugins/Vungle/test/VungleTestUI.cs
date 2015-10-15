@@ -284,6 +284,13 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
 		Vungle.onLogEvent -= onLogEvent;
 	}
+	
+	void OnApplicationPause(bool pauseStatus) {
+		if (pauseStatus)
+			Vungle.onPause();
+		else
+			Vungle.onResume();
+	}
 
 
 	void onAdStartedEvent()
