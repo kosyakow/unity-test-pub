@@ -18,7 +18,7 @@ echo "Build:" $build
 ./sikuli/runScript -r ./sikuli/test.sikuli
 sed -i '' 's/iPhone Developer/iPhone Distribution/g' ./unity-test/VungleUnityTest/Unity-iPhone.xcodeproj/project.pbxproj
 xcodebuild -project ./unity-test/VungleUnityTest/Unity-iPhone.xcodeproj -scheme Unity-iPhone archive -archivePath ./unity-test/VungleUnityTest.xcarchive
-xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUnityTest.xcarchive/" -exportPath "./unity-test/VungleUnityTest.ipa" -exportProvisioningProfile "iOSTeam Provisioning Profile: *"
+xcodebuild -exportArchive -exportFormat ipa -archivePath "./unity-test/VungleUnityTest.xcarchive/" -exportPath "./unity-test/VungleUnityTest.ipa" -exportProvisioningProfile "Vungle In House Distribution"
 mv ./unity-test/VungleUnityTest.ipa .
 rm -r -f ./unity-test/VungleUnityTest
 rm -r -f ./unity-test/VungleUnityTest.xcarchive
