@@ -13,7 +13,7 @@ class BuildGenerator
 		
 	
 		PlayerSettings.Android.bundleVersionCode = 2;
-		PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.Auto;
+		//PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.Auto;
 
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.Android);
 		var original = EditorBuildSettings.scenes;
