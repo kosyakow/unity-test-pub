@@ -159,12 +159,10 @@ public class VungleTestUI : MonoBehaviour
 	{
 		beginGuiColomn();
 
-		#if UNITY_IPHONE
 		if( GUILayout.Button( logView?"Main":"Log" ) )
 		{
 			logView = !logView;
 		}
-		#endif
 		if (!logView) {
 			#if UNITY_IPHONE
 			GUI.enabled = !bInit;
@@ -255,10 +253,12 @@ public class VungleTestUI : MonoBehaviour
 			if (GUILayout.Button ("Clear log")) {
 				log = "";
 			}
+			#if UNITY_IPHONE
 			if (GUILayout.Button (enableLog ? "Disable log" : "Enable log")) {
 				enableLog = !enableLog;
 				Vungle.setLogEnable(enableLog);
 			}
+			#endif
 			GUILayout.Label (log);
 		}
 		endGuiColumn();
@@ -271,6 +271,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdStartedEvent += onAdStartedEvent;
 		Vungle.onAdEndedEvent += onAdEndedEvent;
 		Vungle.onAdViewedEvent += onAdViewedEvent;
+		Vungle.adPlayableEvent += adPlayableEvent;
 		Vungle.onCachedAdAvailableEvent += onCachedAdAvailableEvent;
 		Vungle.onLogEvent += onLogEvent;
 	}
@@ -281,6 +282,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdStartedEvent -= onAdStartedEvent;
 		Vungle.onAdEndedEvent -= onAdEndedEvent;
 		Vungle.onAdViewedEvent -= onAdViewedEvent;
+		Vungle.adPlayableEvent -= adPlayableEvent;
 		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
 		Vungle.onLogEvent -= onLogEvent;
 	}
@@ -294,31 +296,42 @@ public class VungleTestUI : MonoBehaviour
 
 	void onAdStartedEvent()
 	{
+		log = "onAdStartedEvent" + "\n" + log;
 		Debug.Log( "onAdStartedEvent" );
 	}
 
 
 	void onAdEndedEvent()
 	{
+		log = "onAdEndedEvent " + "\n" + log;
 		Debug.Log( "onAdEndedEvent" );
 	}
 
 
 	void onAdViewedEvent( double watched, double length )
 	{
+		log = "onAdViewedEvent. watched: " + watched + ", length: " + length + "\n" + log;
 		Debug.Log( "onAdViewedEvent. watched: " + watched + ", length: " + length );
 	}
 
 
-	void onCachedAdAvailableEvent()
+	void adPlayableEvent(bool available)
 	{
-		adAvailable = true;
-		Debug.Log( "onCachedAdAvailableEvent" );
+		adAvailable = available;
+		log = "adPlayableEvent: " + available + "\n" + log;
+		Debug.Log( "adPlayableEvent" );
 	}
 
+	void onCachedAdAvailableEvent()
+	{
+//		adAvailable = true;
+		log = "onCachedAdAvailableEvent" + "\n" + log;
+		Debug.Log( "onCachedAdAvailableEvent" );
+	}
+	
 	void onLogEvent(string logMessage)
 	{
-		log = logMessage + "\n" + log;
+		log = "onLogEvent: " + logMessage + "\n" + log;
 		Debug.Log( "onLogEvent" );
 	}
 	
