@@ -51,7 +51,7 @@ public class VungleTestUI : MonoBehaviour
 	private Rect windowRect;   // calculated bounds of the window that holds the scrolling list
 	private Vector2 listSize;  // calculated dimensions of the scrolling list placed inside the window
 
-#if UNITY_IPHONE || UNITY_ANDROID
+	#if UNITY_IPHONE || UNITY_ANDROID || UNITY_WSA_10_0
 
 	void Update()
 	{
@@ -125,7 +125,7 @@ public class VungleTestUI : MonoBehaviour
 		else if (portrait)
 			orientation = 3;
 		#endif
-		#if UNITY_ANDROID
+		#if UNITY_ANDROID || UNITY_WSA_10_0
 		var orientation = landscape?true:false;
 		#endif
 		Dictionary<string,object> options = new Dictionary<string,object> ();
@@ -159,12 +159,10 @@ public class VungleTestUI : MonoBehaviour
 	{
 		beginGuiColomn();
 
-		#if UNITY_IPHONE
 		if( GUILayout.Button( logView?"Main":"Log" ) )
 		{
 			logView = !logView;
 		}
-		#endif
 		if (!logView) {
 			#if UNITY_IPHONE
 			GUI.enabled = !bInit;
@@ -195,7 +193,7 @@ public class VungleTestUI : MonoBehaviour
 			landscape = GUILayout.Toggle (landscape, "Force landscape");
 			portrait = GUILayout.Toggle (portrait, "Force portrait");
 			#endif
-			#if UNITY_ANDROID
+			#if UNITY_ANDROID || UNITY_WSA_10_0
 			landscape = GUILayout.Toggle (landscape, "Match video orientation");
 			immersive = GUILayout.Toggle (immersive, "Immersive mode");
 			#endif
@@ -255,10 +253,12 @@ public class VungleTestUI : MonoBehaviour
 			if (GUILayout.Button ("Clear log")) {
 				log = "";
 			}
+			#if UNITY_IPHONE
 			if (GUILayout.Button (enableLog ? "Disable log" : "Enable log")) {
 				enableLog = !enableLog;
 				Vungle.setLogEnable(enableLog);
 			}
+			#endif
 			GUILayout.Label (log);
 		}
 		endGuiColumn();
@@ -271,6 +271,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdStartedEvent += onAdStartedEvent;
 		Vungle.onAdEndedEvent += onAdEndedEvent;
 		Vungle.onAdViewedEvent += onAdViewedEvent;
+		Vungle.adPlayableEvent += adPlayableEvent;
 		Vungle.onCachedAdAvailableEvent += onCachedAdAvailableEvent;
 		Vungle.onLogEvent += onLogEvent;
 	}
@@ -281,6 +282,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onAdStartedEvent -= onAdStartedEvent;
 		Vungle.onAdEndedEvent -= onAdEndedEvent;
 		Vungle.onAdViewedEvent -= onAdViewedEvent;
+		Vungle.adPlayableEvent -= adPlayableEvent;
 		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
 		Vungle.onLogEvent -= onLogEvent;
 	}
@@ -295,28 +297,38 @@ public class VungleTestUI : MonoBehaviour
 
 	void onAdStartedEvent()
 	{
+		log = "onAdStartedEvent\n" + log;
 		Debug.Log( "onAdStartedEvent" );
 	}
 
 
 	void onAdEndedEvent()
 	{
+		log = "onAdEndedEvent\n" + log;
 		Debug.Log( "onAdEndedEvent" );
 	}
 
 
 	void onAdViewedEvent( double watched, double length )
 	{
+		log = "onAdViewedEvent: " + watched + ", " + length + "\n" + log;
 		Debug.Log( "onAdViewedEvent. watched: " + watched + ", length: " + length );
 	}
 
 
-	void onCachedAdAvailableEvent()
+	void adPlayableEvent(bool available)
 	{
-		adAvailable = true;
+		log = "adPlayableEvent: " + available + "\n" + log;
+		adAvailable = available;
 		Debug.Log( "onCachedAdAvailableEvent" );
 	}
-
+	
+	void onCachedAdAvailableEvent()
+	{
+		log = "onCachedAdAvailableEvent\n" + log;
+		Debug.Log( "onCachedAdAvailableEvent" );
+	}
+	
 	void onLogEvent(string logMessage)
 	{
 		log = logMessage + "\n" + log;
