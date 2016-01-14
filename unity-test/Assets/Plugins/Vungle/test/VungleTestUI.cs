@@ -51,7 +51,7 @@ public class VungleTestUI : MonoBehaviour
 	private Rect windowRect;   // calculated bounds of the window that holds the scrolling list
 	private Vector2 listSize;  // calculated dimensions of the scrolling list placed inside the window
 
-	#if UNITY_IPHONE || UNITY_ANDROID || UNITY_WSA_10_0
+	#if UNITY_IPHONE || UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 
 	void Update()
 	{
@@ -125,7 +125,7 @@ public class VungleTestUI : MonoBehaviour
 		else if (portrait)
 			orientation = 3;
 		#endif
-		#if UNITY_ANDROID || UNITY_WSA_10_0
+		#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 		var orientation = landscape?true:false;
 		#endif
 		Dictionary<string,object> options = new Dictionary<string,object> ();
@@ -193,7 +193,7 @@ public class VungleTestUI : MonoBehaviour
 			landscape = GUILayout.Toggle (landscape, "Force landscape");
 			portrait = GUILayout.Toggle (portrait, "Force portrait");
 			#endif
-			#if UNITY_ANDROID || UNITY_WSA_10_0
+			#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 			landscape = GUILayout.Toggle (landscape, "Match video orientation");
 			immersive = GUILayout.Toggle (immersive, "Immersive mode");
 			#endif
