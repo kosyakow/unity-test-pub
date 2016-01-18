@@ -51,8 +51,6 @@ public class VungleTestUI : MonoBehaviour
 	private Rect windowRect;   // calculated bounds of the window that holds the scrolling list
 	private Vector2 listSize;  // calculated dimensions of the scrolling list placed inside the window
 
-	#if UNITY_IPHONE || UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
-
 	void Update()
 	{
 		if (Input.touchCount != 1)
@@ -117,6 +115,7 @@ public class VungleTestUI : MonoBehaviour
 	}
 
 	Dictionary<string,object> formatOptions() {
+		Dictionary<string,object> options = new Dictionary<string,object> ();
 		#if UNITY_IPHONE
 		var orientation = 5;
 		if (landscape && !portrait) {
@@ -124,13 +123,12 @@ public class VungleTestUI : MonoBehaviour
 		}
 		else if (portrait)
 			orientation = 3;
+		options.Add ("orientation", orientation);
 		#endif
 		#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
-		var orientation = landscape?true:false;
+		options.Add ("orientation", landscape?true:false);
 		#endif
-		Dictionary<string,object> options = new Dictionary<string,object> ();
 		options.Add ("incentivized", incentivized);
-		options.Add ("orientation", orientation);
 		options.Add ("large", large);
 		if (userTag != "")
 			options.Add ("userTag", userTag);
@@ -269,10 +267,8 @@ public class VungleTestUI : MonoBehaviour
 	void OnEnable()
 	{
 		Vungle.onAdStartedEvent += onAdStartedEvent;
-		Vungle.onAdEndedEvent += onAdEndedEvent;
-		Vungle.onAdViewedEvent += onAdViewedEvent;
 		Vungle.adPlayableEvent += adPlayableEvent;
-		Vungle.onCachedAdAvailableEvent += onCachedAdAvailableEvent;
+		Vungle.onAdFinishedEvent += onAdFinishedEvent;
 		Vungle.onLogEvent += onLogEvent;
 	}
 
@@ -280,10 +276,8 @@ public class VungleTestUI : MonoBehaviour
 	void OnDisable()
 	{
 		Vungle.onAdStartedEvent -= onAdStartedEvent;
-		Vungle.onAdEndedEvent -= onAdEndedEvent;
-		Vungle.onAdViewedEvent -= onAdViewedEvent;
 		Vungle.adPlayableEvent -= adPlayableEvent;
-		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
+		Vungle.onAdFinishedEvent -= onAdFinishedEvent;
 		Vungle.onLogEvent -= onLogEvent;
 	}
 	
@@ -302,20 +296,6 @@ public class VungleTestUI : MonoBehaviour
 	}
 
 
-	void onAdEndedEvent()
-	{
-		log = "onAdEndedEvent\n" + log;
-		Debug.Log( "onAdEndedEvent" );
-	}
-
-
-	void onAdViewedEvent( double watched, double length )
-	{
-		log = "onAdViewedEvent: " + watched + ", " + length + "\n" + log;
-		Debug.Log( "onAdViewedEvent. watched: " + watched + ", length: " + length );
-	}
-
-
 	void adPlayableEvent(bool available)
 	{
 		log = "adPlayableEvent: " + available + "\n" + log;
@@ -323,12 +303,12 @@ public class VungleTestUI : MonoBehaviour
 		Debug.Log( "onCachedAdAvailableEvent" );
 	}
 	
-	void onCachedAdAvailableEvent()
+	void onAdFinishedEvent(AdFinishedEventArgs arg)
 	{
-		log = "onCachedAdAvailableEvent\n" + log;
-		Debug.Log( "onCachedAdAvailableEvent" );
+		log = "onAdFinishedEvent. watched: " + arg.TimeWatched + ", length: " + arg.TotalDuration  + ", isCompletedView: " + arg.IsCompletedView + "\n" + log;
+		Debug.Log( "onAdFinishedEvent" );
 	}
-	
+
 	void onLogEvent(string logMessage)
 	{
 		log = logMessage + "\n" + log;
@@ -406,6 +386,4 @@ public class VungleTestUI : MonoBehaviour
 		
 		return rAdjustedBounds.Contains(screenPos);
 	}
-
-#endif
 }
