@@ -51,7 +51,6 @@ public class VungleTestUI : MonoBehaviour
 	private Rect windowRect;   // calculated bounds of the window that holds the scrolling list
 	private Vector2 listSize;  // calculated dimensions of the scrolling list placed inside the window
 
-	#if UNITY_IPHONE || UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO 
 	void Update()
 	{
 		if (Input.touchCount != 1)
@@ -116,16 +115,17 @@ public class VungleTestUI : MonoBehaviour
 	}
 
 	Dictionary<string,object> formatOptions() {
+		var orientation = 0;
 		#if UNITY_IPHONE
-		var orientation = 5;
+		orientation = 5;
 		if (landscape && !portrait) {
 			orientation = 4;
 		}
 		else if (portrait)
 			orientation = 3;
 		#endif
-	#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
-		var orientation = landscape?true:false;
+		#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
+		orientation = landscape?true:false;
 		#endif
 		Dictionary<string,object> options = new Dictionary<string,object> ();
 		options.Add ("incentivized", incentivized);
@@ -178,8 +178,8 @@ public class VungleTestUI : MonoBehaviour
 			userTag = GUILayout.TextField (userTag);
 
 			if (GUILayout.Button ("Init")) {
-				Vungle.init (appId, appId);
 				bInit = true;
+				Vungle.init (appId, appId);
 				if (Vungle.isAdvertAvailable ())
 					adAvailable = true;
 			}
@@ -192,7 +192,7 @@ public class VungleTestUI : MonoBehaviour
 			landscape = GUILayout.Toggle (landscape, "Force landscape");
 			portrait = GUILayout.Toggle (portrait, "Force portrait");
 			#endif
-	#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
+			#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 			landscape = GUILayout.Toggle (landscape, "Match video orientation");
 			immersive = GUILayout.Toggle (immersive, "Immersive mode");
 			#endif
@@ -285,7 +285,7 @@ public class VungleTestUI : MonoBehaviour
 		Vungle.onCachedAdAvailableEvent -= onCachedAdAvailableEvent;
 		Vungle.onLogEvent -= onLogEvent;
 	}
-
+	
 	void OnApplicationPause(bool pauseStatus) {
 		if (pauseStatus)
 			Vungle.onPause();
@@ -293,44 +293,44 @@ public class VungleTestUI : MonoBehaviour
 			Vungle.onResume();
 	}
 
+
 	void onAdStartedEvent()
 	{
-		log = "onAdStartedEvent" + "\n" + log;
+		log = "onAdStartedEvent\n" + log;
 		Debug.Log( "onAdStartedEvent" );
 	}
 
 
 	void onAdEndedEvent()
 	{
-		log = "onAdEndedEvent " + "\n" + log;
+		log = "onAdEndedEvent\n" + log;
 		Debug.Log( "onAdEndedEvent" );
 	}
 
 
 	void onAdViewedEvent( double watched, double length )
 	{
-		log = "onAdViewedEvent. watched: " + watched + ", length: " + length + "\n" + log;
+		log = "onAdViewedEvent: " + watched + ", " + length + "\n" + log;
 		Debug.Log( "onAdViewedEvent. watched: " + watched + ", length: " + length );
 	}
 
 
 	void adPlayableEvent(bool available)
 	{
-		adAvailable = available;
 		log = "adPlayableEvent: " + available + "\n" + log;
-		Debug.Log( "adPlayableEvent" );
+		adAvailable = available;
+		Debug.Log( "onCachedAdAvailableEvent" );
 	}
-
+	
 	void onCachedAdAvailableEvent()
 	{
-//		adAvailable = true;
-		log = "onCachedAdAvailableEvent" + "\n" + log;
+		log = "onCachedAdAvailableEvent\n" + log;
 		Debug.Log( "onCachedAdAvailableEvent" );
 	}
 	
 	void onLogEvent(string logMessage)
 	{
-		log = "onLogEvent: " + logMessage + "\n" + log;
+		log = logMessage + "\n" + log;
 		Debug.Log( "onLogEvent" );
 	}
 	
@@ -405,6 +405,4 @@ public class VungleTestUI : MonoBehaviour
 		
 		return rAdjustedBounds.Contains(screenPos);
 	}
-
-#endif
 }
