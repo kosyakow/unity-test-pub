@@ -13,7 +13,7 @@ build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
 
 [ -f ./unity-test/VungleUnityTest.apk ] && rm ./unity-test/VungleUnityTest.apk
-/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage 
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage 
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildAndroid -CustomArgs:ver=$version.$build &
 ./sikuli/runScript -r ./sikuli/test.sikuli
 mv ./unity-test/VungleUnityTest.apk .
