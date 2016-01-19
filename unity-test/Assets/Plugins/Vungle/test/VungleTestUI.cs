@@ -122,7 +122,7 @@ public class VungleTestUI : MonoBehaviour
 			orientation = 5;
 		}
 		else if (portrait)
-			orientation = 7;
+			orientation = 1;
 		options.Add ("orientation", orientation);
 		#endif
 		#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
