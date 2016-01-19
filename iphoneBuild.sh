@@ -13,7 +13,7 @@ build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
 [ -f ./unity-test/VungleUnityTest.ipa ] && rm ./unity-test/VungleUnityTest.ipa
 
-/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $currentPath/unity-test/ -executeMethod BuildGenerator.BuildiPhone -CustomArgs:ver=$version.$build &
 ./sikuli/runScript -r ./sikuli/test.sikuli
 sed -i '' 's/iPhone Developer/iPhone Distribution/g' ./unity-test/VungleUnityTest/Unity-iPhone.xcodeproj/project.pbxproj
