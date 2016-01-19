@@ -117,12 +117,12 @@ public class VungleTestUI : MonoBehaviour
 	Dictionary<string,object> formatOptions() {
 		Dictionary<string,object> options = new Dictionary<string,object> ();
 		#if UNITY_IPHONE
-		var orientation = 5;
+		var orientation = 6;
 		if (landscape && !portrait) {
-			orientation = 4;
+			orientation = 5;
 		}
 		else if (portrait)
-			orientation = 3;
+			orientation = 7;
 		options.Add ("orientation", orientation);
 		#endif
 		#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
