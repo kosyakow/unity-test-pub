@@ -16,10 +16,11 @@ d1=$(date +%s)
 build=$(expr $d1 / 60 - 23875980)
 echo "Build:" $build
 
-PROJECT_PATH="C:/work/unity/unity-test"
+#PROJECT_PATH="C:/work/unity"
+PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
 
-#/Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -projectPath $currentPath/unity-test/ -importPackage $currentPath/VungleSDK.unitypackage
-"c:/Program Files/Unity/Editor/Unity" -quit -projectPath $PROJECT_PATH -executeMethod BuildGenerator.BuildUWP -CustomArgs:ver=$version.$build
+"c:/Program Files/Unity/Editor/Unity" -quit -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
+"c:/Program Files/Unity/Editor/Unity" -quit -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildUWP -CustomArgs:ver=$version.$build
 
 cp uwp/VungleUnity5Test.csproj.user unity-test/Builds/WSA/VungleUnity5Test/VungleUnity5Test.csproj.user
 cp uwp/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props
