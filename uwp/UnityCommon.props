@@ -1,0 +1,8 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <UnityInstallationDir>C:\Program Files\Unity\Editor</UnityInstallationDir>
+        <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport</UnityWSAPlayerDir>
+        <UnityWSAToolsDir>$(ProjectDir)..\Unity\Tools</UnityWSAToolsDir>
+        <UnityProjectDir>C:\work\unity\unity-test</UnityProjectDir>
+    </PropertyGroup>
+</Project>
