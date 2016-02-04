@@ -58,10 +58,11 @@ class BuildGenerator
 	{
 		PlayerSettings.bundleIdentifier = "com.vungle.unity5test";
 		PlayerSettings.companyName = "Vungle";
-		PlayerSettings.productName = "VungleUnity5Test";
+		PlayerSettings.productName = "VungleUnity5Test_win10";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
         PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, true);
         PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Location, true);
+        PlayerSettings.WSA.packageVersion = new Version(CommandLineReader.GetCustomArgument("ver"));
 
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.WSAPlayer);
 		EditorUserBuildSettings.wsaSDK = WSASDK.UWP;
