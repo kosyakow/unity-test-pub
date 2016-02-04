@@ -19,8 +19,14 @@ echo "Build:" $build
 #PROJECT_PATH="C:/work/unity"
 PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
 
-"c:/Program Files/Unity/Editor/Unity" -quit -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
-"c:/Program Files/Unity/Editor/Unity" -quit -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildUWP -CustomArgs:ver=$version.$build
+echo "Import plugin..."
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
+
+echo "Build unity project..."
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildUWP -CustomArgs:ver=$version.$build
+
+echo "Build unity project again..."
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildUWP -CustomArgs:ver=$version.$build
 
 cp uwp/VungleUnity5Test.csproj.user unity-test/Builds/WSA/VungleUnity5Test/VungleUnity5Test.csproj.user
 cp uwp/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props

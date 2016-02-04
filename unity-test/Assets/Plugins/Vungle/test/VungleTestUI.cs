@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class VungleTestUI : MonoBehaviour
 {
+#if UNITY_ANDROID || UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 	public bool logView = false;
 	public bool enableLog = true;
 	public string log = "";
@@ -386,4 +387,5 @@ public class VungleTestUI : MonoBehaviour
 		
 		return rAdjustedBounds.Contains(screenPos);
 	}
+#endif
 }
