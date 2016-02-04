@@ -17,7 +17,6 @@ build=$(expr $(expr $d1 / 60 - 23875980) / 1000)
 rev=$(expr $(expr $d1 / 60 - 23875980) % 1000)
 echo "Build:" $build
 echo "Rev:" $rev
-exit
 
 #PROJECT_PATH="C:/work/unity"
 PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
