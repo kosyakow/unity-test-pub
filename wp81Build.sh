@@ -30,7 +30,7 @@ echo "Build unity project..."
 echo "Build unity project again..."
 "c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
 
-cp win81/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props
+cp uwp/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props
 
 NUGET=~/bin/nuget.exe
 MS_BUILD_EXE="C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe"
