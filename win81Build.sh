@@ -18,19 +18,18 @@ rev=$(expr $(expr $d1 / 60 - 23875980) % 1000)
 echo "Build:" $build
 echo "Rev:" $rev
 
-PROJECT_PATH="C:/work/unity"
-#PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
+#PROJECT_PATH="C:/work/unity"
+PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
 
 echo "Import plugin..."
-#"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
 
 echo "Build unity project..."
-#"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWin81 -CustomArgs:ver=$version.$build.$rev
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWin81 -CustomArgs:ver=$version.$build.$rev
 
 echo "Build unity project again..."
-#"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWin81 -CustomArgs:ver=$version.$build.$rev
+"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWin81 -CustomArgs:ver=$version.$build.$rev
 
-#cp uwp/VungleUnity5Test.csproj.user unity-test/Builds/WSA/VungleUnity5Test_win10/VungleUnity5Test_win10.csproj.user
 cp uwp/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props
 
 NUGET=~/bin/nuget.exe

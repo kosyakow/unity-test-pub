@@ -18,8 +18,8 @@ rev=$(expr $(expr $d1 / 60 - 23875980) % 1000)
 echo "Build:" $build
 echo "Rev:" $rev
 
-PROJECT_PATH="C:/work/unity"
-#PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
+#PROJECT_PATH="C:/work/unity"
+PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity5_Windows_Test_App"
 
 echo "Import plugin..."
 "c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
