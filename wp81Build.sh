@@ -21,6 +21,7 @@ echo "Rev:" $rev
 #PROJECT_PATH="C:/work/unity"
 PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity_Windows_Test_App"
 
+
 echo "Import plugin..."
 "c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
 
