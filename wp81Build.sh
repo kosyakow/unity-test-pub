@@ -47,7 +47,7 @@ echo "Sign"
 "c:/Users/pushok/Desktop/sign.sh"
 
 echo "Create test zip"
-PACKAGES="unity-test/Builds/WSA/VungleUnity5Test_wp81/AppPackages/VungleUnityTest_wp81_*_Test"
+PACKAGES="unity-test/Builds/WSA/VungleUnityTest_wp81/AppPackages/VungleUnityTest_wp81_*_Test"
 for dir in $PACKAGES; do
 	pushd "$dir"
 	ZIPFILE=${PWD##*/}
