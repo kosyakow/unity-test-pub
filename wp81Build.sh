@@ -25,6 +25,9 @@ PROJECT_PATH="C:/jenkins/workspace/Mobile_Unity_Windows_Test_App"
 echo "Import plugin..."
 "c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
 
+echo "Copy lib..."
+cp unity-test\Assets\Plugins\metro\WindowsPhone81\VungleSDK.winmd unity-test\Assets\Plugins\metro\VungleSDK.winmd
+
 echo "Build unity project..."
 "c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
 
