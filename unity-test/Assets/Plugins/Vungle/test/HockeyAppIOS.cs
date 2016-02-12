@@ -38,7 +38,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 public class HockeyAppIOS : MonoBehaviour {
-
+	#if (UNITY_IPHONE && !UNITY_EDITOR)
 	protected const string HOCKEYAPP_BASEURL = "https://rink.hockeyapp.net/";
 	protected const string HOCKEYAPP_CRASHESPATH = "api/2/apps/[APPID]/crashes/upload";
 	protected const int MAX_CHARS = 199800;
@@ -404,4 +404,5 @@ public class HockeyAppIOS : MonoBehaviour {
 		HandleException(e.Source, e.StackTrace);
 		#endif
 	}
+	#endif
 }

@@ -38,7 +38,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 public class HockeyAppAndroid : MonoBehaviour {
-	
+	#if (UNITY_ANDROID && !UNITY_EDITOR)
+
 	protected const string HOCKEYAPP_BASEURL = "https://rink.hockeyapp.net/";
 	protected const string HOCKEYAPP_CRASHESPATH = "api/2/apps/[APPID]/crashes/upload";
 	protected const int MAX_CHARS = 199800;
@@ -424,4 +425,5 @@ public class HockeyAppAndroid : MonoBehaviour {
 		HandleException(e.Source, e.StackTrace);
 		#endif
 	}
+	#endif
 }
