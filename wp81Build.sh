@@ -26,10 +26,10 @@ echo "Import plugin..."
 "c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -importPackage $PROJECT_PATH/VungleSDK.unitypackage
 
 echo "Build unity project..."
-"c:/Program Files(x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
+"c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
 
 echo "Build unity project again..."
-"c:/Program Files/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
+"c:/Program Files (x86)/Unity/Editor/Unity" -quit -batchmode -nographics -projectPath $PROJECT_PATH/unity-test -executeMethod BuildGenerator.BuildWP81 -CustomArgs:ver=$version.$build.$rev
 
 cp uwp/UnityCommon.props unity-test/Builds/WSA/UnityCommon.props
 
