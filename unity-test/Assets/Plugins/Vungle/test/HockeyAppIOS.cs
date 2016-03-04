@@ -36,7 +36,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-
+#if (UNITY_EDITOR)
 public class HockeyAppIOS : MonoBehaviour {
 	#if (UNITY_IPHONE && !UNITY_EDITOR)
 	protected const string HOCKEYAPP_BASEURL = "https://rink.hockeyapp.net/";
@@ -406,3 +406,4 @@ public class HockeyAppIOS : MonoBehaviour {
 	}
 	#endif
 }
+#endif
