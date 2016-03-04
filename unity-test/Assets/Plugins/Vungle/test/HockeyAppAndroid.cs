@@ -37,6 +37,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
+#if (UNITY_EDITOR)
 public class HockeyAppAndroid : MonoBehaviour {
 	#if (UNITY_ANDROID && !UNITY_EDITOR)
 
@@ -427,3 +428,4 @@ public class HockeyAppAndroid : MonoBehaviour {
 	}
 	#endif
 }
+#endif
