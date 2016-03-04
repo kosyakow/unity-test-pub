@@ -63,17 +63,19 @@ class BuildGenerator
     }
 
     static void BuildUWP()
-	{
+    {
 		PlayerSettings.bundleIdentifier = "com.vungle.unity5test";
 		PlayerSettings.companyName = "Vungle";
 		PlayerSettings.productName = "VungleUnity5Test_win10";
 		PlayerSettings.bundleVersion = CommandLineReader.GetCustomArgument("ver");
-        PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, true);
-        PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Location, true);
-        PlayerSettings.WSA.packageVersion = new Version(CommandLineReader.GetCustomArgument("ver"));
+        	PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, true);
+        	PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Location, true);
+        	PlayerSettings.WSA.packageVersion = new Version(CommandLineReader.GetCustomArgument("ver"));
 
-        EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.WSAPlayer);
+        	EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.WSAPlayer);
+        	#if UNITY_WSA_10_0 || UNITY_WINRT_8_1 || UNITY_METRO
 		EditorUserBuildSettings.wsaSDK = WSASDK.UWP;
+		#endif
 		var original = EditorBuildSettings.scenes;
 		var newSettings = new EditorBuildSettingsScene[original.Length + 1];
 		System.Array.Copy(original, newSettings, original.Length);
