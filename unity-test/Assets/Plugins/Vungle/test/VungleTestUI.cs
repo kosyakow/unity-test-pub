@@ -202,9 +202,9 @@ public class VungleTestUI : MonoBehaviour
 			#endif
 			#if UNITY_ANDROID
 			testAnimation = GUILayout.Toggle (testAnimation, "Test transition animation");
-			GUI.enabled = testAnimation;
+			GUI.enabled = adAvailable && testAnimation;
 			animation = GUILayout.Toggle (animation, "Transition animation");
-			GUI.enabled = true;
+			GUI.enabled = adAvailable;
 			#endif
 			incentivized = GUILayout.Toggle (incentivized, "Incentivized ad");
 			muted = GUILayout.Toggle (muted, "Start muted");
