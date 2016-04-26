@@ -13,7 +13,8 @@ public class VungleTestUI : MonoBehaviour
 	public bool portrait = false;
 	public bool incentivized = false;
 	public bool immersive = false;
-	public bool animation = true;
+	public bool testAnimation = false;
+	public bool animation = false;
 	public bool muted = false;
 	public bool large = false;
 	public string appId = "vungleTest";
@@ -144,7 +145,8 @@ public class VungleTestUI : MonoBehaviour
 			options.Add ("continueText", continueText);
 		options.Add ("placement", placement);
 		options.Add ("immersive", immersive);
-		options.Add ("animation", animation);
+		if (testAnimation)
+			options.Add ("animation", animation);
 		options.Add ("key1", key1);
 		options.Add ("key2", key2);
 		options.Add ("key3", key3);
@@ -199,7 +201,10 @@ public class VungleTestUI : MonoBehaviour
 			immersive = GUILayout.Toggle (immersive, "Immersive mode");
 			#endif
 			#if UNITY_ANDROID
+			testAnimation = GUILayout.Toggle (testAnimation, "Test transition animation");
+			GUI.enabled = testAnimation;
 			animation = GUILayout.Toggle (animation, "Transition animation");
+			GUI.enabled = true;
 			#endif
 			incentivized = GUILayout.Toggle (incentivized, "Incentivized ad");
 			muted = GUILayout.Toggle (muted, "Start muted");
